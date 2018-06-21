@@ -9,18 +9,11 @@ app.use(bodyParser.json());
 let mongoose = require('mongoose')
 mongoose.connect("mongodb://localhost:27017/BrollyAPI")
 
-app.post('/transaction', (req, res) => {
-  let newTransaction = new Transaction(req.body)
-  data.map((element) => {
-    if(element.phone == req.body.device) {
-      newTransaction.save().then((transaction) => {
-        res.json ({ message: 'Success!', transaction})
-      }).catch((err) => {
-        res.status(400).send(err)
-      })
-    }
-  })
-})
+let router = express.Router()
+let transaction = require('./app/routes/routes')
+
+app.route('/transaction')
+  .post(transaction.addTransaction)
 
 
 let port = process.env.PORT || 8080
