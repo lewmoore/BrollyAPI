@@ -35,7 +35,7 @@ describe('Transaction', function(){
     .post('/transaction')
     .send(transaction)
     .end(function(err, res){
-      res.should.have.status(200)
+      res.should.have.status(400)
       res.body.should.have.property('errors')
       res.body.errors.should.have.property('cardNumber')
       res.body.errors.should.have.property('expiryDate')

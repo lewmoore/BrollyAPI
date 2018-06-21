@@ -10,12 +10,10 @@ mongoose.connect("mongodb://localhost:27017/BrollyAPI")
 
 app.post('/transaction', function(req, res){
   let newTransaction = new Transaction(req.body)
-  newTransaction.save(function(err, transaction){
-    if (err) {
-      res.send(err)
-    } else {
-      res.json ({ message: 'Success!', transaction})
-    }
+  newTransaction.save().then(function(transaction){
+    res.json ({ message: 'Success!', transaction})
+  }).catch(function(err){
+    res.status(400).send(err)
   })
 })
 
