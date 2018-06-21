@@ -24,4 +24,21 @@ describe('Transaction', function(){
     })
     done()
   })
+
+  it('should error if given incorrect data', function(){
+    let transaction = {
+      device: 'iPhone X 64GB',
+      premium: 50.42,
+      cvv: 123
+    }
+    chai.request(server)
+    .post('/transaction')
+    .send(transaction)
+    .end(function(err, res){
+      res.should.have.status(200)
+      res.body.should.have.property('errors')
+      res.body.errors.should.have.property('cardNumber')
+      res.body.errors.should.have.property('expiryDate')
+    })
+  })
 })
