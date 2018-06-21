@@ -10,7 +10,6 @@ let mongoose = require('mongoose')
 mongoose.connect("mongodb://localhost:27017/BrollyAPI")
 
 app.post('/transaction', (req, res) => {
-  console.log(req.body)
   let newTransaction = new Transaction(req.body)
   data.map((element) => {
     if(element.phone == req.body.device) {
@@ -21,7 +20,6 @@ app.post('/transaction', (req, res) => {
       })
     }
   })
-
 })
 
 
