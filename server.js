@@ -8,11 +8,11 @@ app.use(bodyParser.json());
 let mongoose = require('mongoose')
 mongoose.connect("mongodb://localhost:27017/BrollyAPI")
 
-app.post('/transaction', function(req, res){
+app.post('/transaction', (req, res) => {
   let newTransaction = new Transaction(req.body)
-  newTransaction.save().then(function(transaction){
+  newTransaction.save().then((transaction) => {
     res.json ({ message: 'Success!', transaction})
-  }).catch(function(err){
+  }).catch((err) => {
     res.status(400).send(err)
   })
 })

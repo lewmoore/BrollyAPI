@@ -6,8 +6,8 @@ let expect = chai.expect
 
 chai.use(chaiHttp)
 
-describe('Transaction', function(){
-  it('should post a transaction', function(done){
+describe('Transaction', () => {
+  it('should post a transaction', (done) => {
     let transaction = {
       device: 'iPhone X 64GB',
       premium: 50.42,
@@ -18,14 +18,14 @@ describe('Transaction', function(){
     chai.request(server)
     .post('/transaction')
     .send(transaction)
-    .end(function(err, res){
+    .end((err, res) => {
       res.should.have.status(200)
       res.text.should.contain('Success!')
     })
     done()
   })
 
-  it('should error if given incorrect data', function(){
+  it('should error if given incorrect data', () => {
     let transaction = {
       device: 'iPhone X 64GB',
       premium: 50.42,
@@ -34,7 +34,7 @@ describe('Transaction', function(){
     chai.request(server)
     .post('/transaction')
     .send(transaction)
-    .end(function(err, res){
+    .end((err, res) => {
       res.should.have.status(400)
       res.body.should.have.property('errors')
       res.body.errors.should.have.property('cardNumber')
